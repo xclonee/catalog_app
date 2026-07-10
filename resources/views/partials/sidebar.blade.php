@@ -24,6 +24,18 @@
                         <p>Produk</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('sales-transactions.index') }}" class="nav-link @class(['active' => request()->routeIs('sales-transactions.*')])">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>Transaksi Penjualan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('stock-transactions.index') }}" class="nav-link @class(['active' => request()->routeIs('stock-transactions.*')])">
+                        <i class="nav-icon fas fa-dolly-flatbed"></i>
+                        <p>Stok Masuk</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

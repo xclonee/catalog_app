@@ -39,6 +39,11 @@ class Merchant extends Authenticatable
         return $this->hasMany(self::class, 'updated_by');
     }
 
+    public function salesTransactions()
+    {
+        return $this->hasMany(SalesTransaction::class);
+    }
+
     protected function casts(): array
     {
         return [

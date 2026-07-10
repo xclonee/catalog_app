@@ -43,6 +43,7 @@ class ProductController extends Controller
             'product_name' => $validated['product_name'],
             'description' => $validated['description'] ?? null,
             'price' => $validated['price'],
+            'stock' => $validated['stock'],
             'product_image' => $imagePath,
             'created_by' => auth()->id(),
             'updated_by' => auth()->id(),

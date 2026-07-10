@@ -17,6 +17,7 @@
                         <th>Image</th>
                         <th>SKU</th>
                         <th>Nama Produk</th>
+                        <th>stok</th>
                         <th>Harga</th>
                         <th>Deskripsi</th>
                         <th>Kategori</th>
@@ -27,14 +28,17 @@
                     @forelse ($products as $product)
                         <tr>
                             <td>
-                                <img
-                                    src="{{ asset('storage/' . $product->product_image) }}"
-                                    alt="{{ $product->product_name }}"
-                                    style="width: 64px; height: 64px; object-fit: cover;"
-                                >
+                                <a href="{{ asset('storage/' . $product->product_image) }}" class="img-preview">
+                                    <img
+                                        src="{{ asset('storage/' . $product->product_image) }}"
+                                        alt="{{ $product->product_name }}"
+                                        style="width: 64px; height: 64px; object-fit: cover;"
+                                    >
+                                </a>
                             </td>
                             <td>{{ $product->sku_product }}</td>
                             <td>{{ $product->product_name }}</td>
+                            <td>{{ $product->stock }}</td>
                             <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                             <td>{{ Str::limit($product->description ?? '-', 80) }}</td>
                             <td>{{ $product->category->category_name }}</td>

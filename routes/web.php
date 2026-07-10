@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SalesTransactionController;
+use App\Http\Controllers\StockTransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,4 +30,6 @@ Route::middleware('auth')->group(function (): void {
 Route::middleware(['auth', 'merchant'])->group(function (): void {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('products', ProductController::class)->except(['show']);
+    Route::resource('sales-transactions', SalesTransactionController::class)->except(['destroy']);
+    Route::resource('stock-transactions', StockTransactionController::class)->except(['destroy']);
 });

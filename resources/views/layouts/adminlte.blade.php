@@ -33,6 +33,29 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @include('partials.swal')
+<!-- Image preview modal (used by product list and form) -->
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <button type="button" class="close p-2" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <img src="" id="imagePreviewModalImg" style="width:100%; height:auto; display:block;" alt="Preview">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('click', 'a.img-preview', function (e) {
+        e.preventDefault();
+        var src = $(this).attr('href');
+        $('#imagePreviewModalImg').attr('src', src);
+        $('#imagePreviewModal').modal('show');
+    });
+</script>
+
 @stack('scripts')
 </body>
 </html>

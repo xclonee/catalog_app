@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
     'product_name',
     'description',
     'price',
+    'stock',
     'product_image',
     'created_by',
     'updated_by',
@@ -29,6 +30,7 @@ class Product extends Model
     {
         return [
             'price' => 'integer',
+            'stock' => 'integer',
         ];
     }
 
@@ -45,5 +47,10 @@ class Product extends Model
     public function updater()
     {
         return $this->belongsTo(Merchant::class, 'updated_by');
+    }
+
+    public function salesTransactions()
+    {
+        return $this->hasMany(SalesTransaction::class);
     }
 }

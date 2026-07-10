@@ -78,6 +78,22 @@
 </div>
 
 <div class="form-group">
+    <label for="stock">Stok</label>
+    <input
+        type="number"
+        name="stock"
+        id="stock"
+        class="form-control @error('stock') is-invalid @enderror"
+        value="{{ old('stock', $product->stock ?? 0) }}"
+        min="0"
+        required
+    >
+    @error('stock')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group">
     <label for="description">Deskripsi</label>
     <textarea
         name="description"
@@ -94,11 +110,13 @@
     <div class="form-group">
         <label>Image Saat Ini</label>
         <div>
-            <img
-                src="{{ asset('storage/' . $product->product_image) }}"
-                alt="{{ $product->product_name }}"
-                style="width: 120px; height: 120px; object-fit: cover;"
-            >
+            <a href="{{ asset('storage/' . $product->product_image) }}" class="img-preview">
+                <img
+                    src="{{ asset('storage/' . $product->product_image) }}"
+                    alt="{{ $product->product_name }}"
+                    style="width: 120px; height: 120px; object-fit: cover;"
+                >
+            </a>
         </div>
     </div>
 @endif
