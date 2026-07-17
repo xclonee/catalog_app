@@ -124,12 +124,6 @@ Buka aplikasi:
 http://127.0.0.1:8000
 ```
 
-Jika menggunakan Laragon virtual host, buka domain lokal yang sudah dikonfigurasi, misalnya:
-
-```text
-http://smart-catalog.test
-```
-
 ## Build Asset Frontend
 
 Untuk development:
@@ -186,20 +180,6 @@ mysql -u root smart_catalog < sql_dump_db/smart_catalog.sql
 - Notifikasi SweetAlert
 - Template dashboard AdminLTE
 
-## Struktur Penting
-
-```text
-app/Models
-app/Http/Controllers
-app/Http/Requests
-app/Http/Middleware
-database/migrations
-database/seeders
-resources/views
-routes/web.php
-specs
-sql_dump_db
-```
 
 ## Troubleshooting
 
