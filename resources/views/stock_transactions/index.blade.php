@@ -5,15 +5,23 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Daftar Stok Masuk</h3>
-            <a href="{{ route('stock-transactions.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus mr-1"></i> Tambah Stok Masuk
-            </a>
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ route('stock-transactions.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus mr-1"></i> Tambah Stok Masuk
+                </a>
+                <div class="d-flex gap-3">
+                    <a href="{{ route('stock-transactions.export.excel') }}" class="btn btn-success">
+                        <i class="fas fa-file-excel mr-1"></i> Export Excel
+                    </a>
+                    <a href="{{ route('stock-transactions.export.pdf') }}" class="btn btn-danger">
+                        <i class="fas fa-file-pdf mr-1"></i> Export PDF
+                    </a>
+                </div>
+            </div>
         </div>
-
         <div class="card-body table-responsive p-0">
-            <table class="table table-bordered table-striped mb-0">
+                <table class="table table-bordered table-striped mb-0">
                 <thead>
                     <tr>
                         <th>No Transaksi</th>

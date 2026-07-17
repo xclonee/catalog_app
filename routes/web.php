@@ -31,5 +31,9 @@ Route::middleware(['auth', 'merchant'])->group(function (): void {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('products', ProductController::class)->except(['show']);
     Route::resource('sales-transactions', SalesTransactionController::class)->except(['destroy']);
+    Route::get('/sales-transactions/export/excel', [SalesTransactionController::class, 'exportExcel'])->name('sales-transactions.export.excel');
+    Route::get('/sales-transactions/export/pdf', [SalesTransactionController::class, 'exportPdf'])->name('sales-transactions.export.pdf');
     Route::resource('stock-transactions', StockTransactionController::class)->except(['destroy']);
+    Route::get('/stock-transactions/export/excel', [StockTransactionController::class, 'exportExcel'])->name('stock-transactions.export.excel');
+    Route::get('/stock-transactions/export/pdf', [StockTransactionController::class, 'exportPdf'])->name('stock-transactions.export.pdf');
 });

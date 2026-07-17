@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StockTransactionsExport;
 use App\Http\Requests\StoreStockTransactionRequest;
 use App\Http\Requests\UpdateStockTransactionRequest;
 use App\Models\Product;
 use App\Models\StockTransaction;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class StockTransactionController extends Controller
 {
@@ -42,7 +46,7 @@ class StockTransactionController extends Controller
             $product->increment('stock', $request->qty);
 
             $transaction = StockTransaction::create([
-                'no_transaksi' => 'TEMP' . uniqid(),
+                'no_transaksi' => 'TEMP'.uniqid(),
                 'product_id' => $request->product_id,
                 'qty' => $request->qty,
                 'transaction_type' => 'masuk',
@@ -50,7 +54,7 @@ class StockTransactionController extends Controller
             ]);
 
             $transaction->update([
-                'no_transaksi' => 'STK' . str_pad($transaction->id, 6, '0', STR_PAD_LEFT),
+                'no_transaksi' => 'STK'.str_pad($transaction->id, 6, '0', STR_PAD_LEFT),
             ]);
         });
 
@@ -109,6 +113,24 @@ class StockTransactionController extends Controller
         });
 
         return redirect()->route('stock-transactions.show', $stockTransaction)->with('success', 'Transaksi stok masuk berhasil diperbarui.');
+    }
+
+    public function exportExcel(): BinaryFileResponse
+    {
+        return Excel::download(new StockTransactionsExport, 'Stok_Masuk_'.now()->format('Y-m-d_H-i-s').'.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $transactions = StockTransaction::with('product')
+            ->where('merchant_id', auth()->id())
+            ->latest()
+            ->get();
+
+        $pdf = Pdf::loadView('stock_transactions.pdf', compact('transactions'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('Stok_Masuk_'.now()->format('Y-m-d_H-i-s').'.pdf');
     }
 
     private function authorizeMerchant(StockTransaction $stockTransaction): void
